@@ -1,0 +1,698 @@
+//definition base stats
+
+$turnNumber = 0;
+
+$shellFactor = 1;
+$shellBase[0] = 600 * $shellFactor;
+$shellBase[1] = 980 * $shellFactor;
+$shellBase[2] = 5000 * $shellFactor;
+$shellBase[3] = 2000 * $shellFactor;
+$shellBase[4] = 4500 * $shellFactor;
+$shellBase[5] = 8000 * $shellFactor;
+$shellBase[6] = 2000 * $shellFactor;
+$shellBase[7] = 5000 * $shellFactor;
+$shellBase[8] = 16000 * $shellFactor;
+$shellBase[9] = 5000 * $shellFactor;
+$shellBase[10] = 1;
+$shellBase[11] = 3500 * $shellFactor;
+$shellBase[13] = 2400 * $shellFactor;
+
+$shieldBase[0] = 5;
+$shieldBase[1] = 10;
+$shieldBase[2] = 150;
+$shieldBase[3] = 40;
+$shieldBase[4] = 400;
+$shieldBase[5] = 100;
+$shieldBase[6] = 50;
+$shieldBase[7] = 30;
+$shieldBase[8] = 850;
+$shieldBase[9] = 10;
+$shieldBase[10] = 0;
+$shieldBase[11] = 7;
+$shieldBase[13] = 20;
+
+$damageFactor = 1;
+
+$damageBase[0] = 200 * $damageFactor;
+$damageBase[1] = 500 * $damageFactor;
+$damageBase[2] = 300 * $damageFactor;
+$damageBase[3] = 1500 * $damageFactor;
+$damageBase[4] = 3000 * $damageFactor;
+$damageBase[5] = 600 * $damageFactor;
+$damageBase[6] = 1200 * $damageFactor;
+$damageBase[7] = 500 * $damageFactor;
+$damageBase[8] = 6000 * $damageFactor;
+$damageBase[9] = 0;
+$damageBase[10] = 0;
+$damageBase[11] = 0;
+$damageBase[13] = 0;
+
+$precisionBase[0] = 25;
+$precisionBase[1] = 35;
+$precisionBase[2] = 10;
+$precisionBase[3] = 15;
+$precisionBase[4] = 20;
+$precisionBase[5] = 15;
+$precisionBase[6] = 70;
+$precisionBase[7] = 10;
+$precisionBase[8] = 40;
+$precisionBase[9] = 0;
+$precisionBase[10] = 0;
+$precisionBase[11] = 0;
+$precisionBase[13] = 0;
+
+$sizeBase[0] = 1;
+$sizeBase[1] = 2;
+$sizeBase[2] = 6;
+$sizeBase[3] = 5;
+$sizeBase[4] = 10;
+$sizeBase[5] = 12;
+$sizeBase[6] = 3;
+$sizeBase[7] = 12;
+$sizeBase[8] = 20;
+$sizeBase[9] = 7;
+$sizeBase[10] = 1;
+$sizeBase[11] = 2;
+$sizeBase[13] = 3;
+
+$dodgeBase[0] = 30;
+$dodgeBase[1] = 40;
+$dodgeBase[2] = 10;
+$dodgeBase[3] = 20;
+$dodgeBase[4] = 13;
+$dodgeBase[5] = 10;
+$dodgeBase[6] = 30;
+$dodgeBase[7] = 5;
+$dodgeBase[8] = 10;
+$dodgeBase[9] = 0;
+$dodgeBase[10] = 0;
+$dodgeBase[11] = 0;
+$dodgeBase[13] = 0;
+
+//Rockets are used before once before combat and ignore dodge and pierce shields
+$rocketBase[0] = 0;
+$rocketBase[1] = 0;
+$rocketBase[2] = 800;
+$rocketBase[3] = 0;
+$rocketBase[4] = 200;
+$rocketBase[5] = 5000;
+$rocketBase[6] = 0;
+$rocketBase[7] = 100;
+$rocketBase[8] = 2500;
+$rocketBase[9] = 0;
+$rocketBase[10] = 0;
+$rocketBase[11] = 0;
+$rocketBase[13] = 0;
+
+/***** INIT FIXED VALUES (Don't change during fight) *****/
+
+$rocketDef[0] = $shipCountDef[0] * $rocketBase[0] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[1] = $shipCountDef[1] * $rocketBase[1] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[2] = $shipCountDef[2] * $rocketBase[2] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[3] = $shipCountDef[3] * $rocketBase[3] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[4] = $shipCountDef[4] * $rocketBase[4] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[5] = $shipCountDef[5] * $rocketBase[5] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[6] = $shipCountDef[6] * $rocketBase[6] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[7] = $shipCountDef[7] * $rocketBase[7] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[8] = $shipCountDef[8] * $rocketBase[8] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[9] = $shipCountDef[9] * $rocketBase[9] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[10] = $shipCountDef[10] * $rocketBase[10] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[11] = $shipCountDef[11] * $rocketBase[11] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketDef[13] = $shipCountDef[13] * $rocketBase[13] * (1 + $techDef[/*Antimatter*/] / 20);
+$rocketTotalDef = $rocketDef[0] + $rocketDef[1] + $rocketDef[2] + $rocketDef[3] +
+    $rocketDef[4] + $rocketDef[5] + $rocketDef[6] + $rocketDef[7] + $rocketDef[8];
+
+$rocketAtk[0] = $shipCountAtk[0] * $rocketBase[0] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[1] = $shipCountAtk[1] * $rocketBase[1] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[2] = $shipCountAtk[2] * $rocketBase[2] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[3] = $shipCountAtk[3] * $rocketBase[3] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[4] = $shipCountAtk[4] * $rocketBase[4] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[5] = $shipCountAtk[5] * $rocketBase[5] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[6] = $shipCountAtk[6] * $rocketBase[6] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[7] = $shipCountAtk[7] * $rocketBase[7] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[8] = $shipCountAtk[8] * $rocketBase[8] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[9] = $shipCountAtk[9] * $rocketBase[9] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[10] = $shipCountAtk[10] * $rocketBase[10] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[11] = $shipCountAtk[11] * $rocketBase[11] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketAtk[13] = $shipCountAtk[13] * $rocketBase[13] * (1 + $techAtk[/*Antimatter*/] / 20);
+$rocketTotalAtk = $rocketAtk[0] + $rocketAtk[1] + $rocketAtk[2] + $rocketAtk[3] +
+    $rocketAtk[4] + $rocketAtk[5] + $rocketAtk[6] + $rocketAtk[7] + $rocketAtk[8];
+
+//init coque def
+$shellDef[0] = $shellBase[0] * (1 + $techDef[/*shipstructur*/] / 20);
+$shellDef[1] = $shellBase[1] * (1 + $techDef[/*shipstructur*/] / 20);
+$shellDef[2] = $shellBase[2] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[14] / 20);
+$shellDef[3] = $shellBase[3] * (1 + $techDef[/*shipstructur*/] / 20);
+$shellDef[4] = $shellBase[4] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[14] / 20);
+$shellDef[5] = $shellBase[5] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[13] / 20);
+$shellDef[6] = $shellBase[6] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[13] / 20);
+$shellDef[7] = $shellBase[7] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[13] / 20);
+$shellDef[8] = $shellBase[8] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[13] / 20);
+$shellDef[9] = $shellBase[9] * (1 + $techDef[/*shipstructur*/] / 20);
+$shellDef[10] = $shellBase[10] * (1 + $techDef[/*shipstructur*/] / 20);
+$shellDef[11] = $shellBase[11] * (1 + $techDef[/*shipstructur*/] / 20);
+$shellDef[13] = $shellBase[13] * (1 + $techDef[/*shipstructur*/] / 20 + $techDef[14] / 20);
+
+//esquive def
+$dodgeDef[0] = $dodgeBase[0] * (1 + $techDef[/*analyse*/] / 20);
+$dodgeDef[1] = $dodgeBase[1] * (1 + $techDef[/*analyse*/] / 20);
+$dodgeDef[2] = $dodgeBase[2] * (1 + $techDef[/*analyse*/] / 20);
+$dodgeDef[3] = $dodgeBase[3] * (1 + $techDef[/*analyse*/] / 20);
+$dodgeDef[4] = $dodgeBase[4] * (1 + $techDef[/*analyse*/] / 20 + $techDef[34] / 20);
+$dodgeDef[5] = $dodgeBase[5] * (1 + $techDef[/*analyse*/] / 20 + $techDef[34] / 20);
+$dodgeDef[6] = $dodgeBase[6] * (1 + $techDef[/*analyse*/] / 20);
+$dodgeDef[7] = $dodgeBase[7] * (1 + $techDef[/*analyse*/] / 20 + $techDef[34] / 20);
+$dodgeDef[8] = $dodgeBase[8] * (1 + $techDef[/*analyse*/] / 20 + $techDef[35] / 20);
+$dodgeDef[9] = 0;
+$dodgeDef[10] = 0;
+$dodgeDef[11] = 0;
+
+//init coque atk
+$shellAtk[0] = $shellBase[0] * (1 + $techAtk[/*shipstructur*/] / 20);
+$shellAtk[1] = $shellBase[1] * (1 + $techAtk[/*shipstructur*/] / 20);
+$shellAtk[2] = $shellBase[2] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[14] / 20);
+$shellAtk[3] = $shellBase[3] * (1 + $techAtk[/*shipstructur*/] / 20);
+$shellAtk[4] = $shellBase[4] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[14] / 20);
+$shellAtk[5] = $shellBase[5] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[13] / 20);
+$shellAtk[6] = $shellBase[6] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[13] / 20);
+$shellAtk[7] = $shellBase[7] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[13] / 20);
+$shellAtk[8] = $shellBase[8] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[13] / 20);
+$shellAtk[9] = $shellBase[9] * (1 + $techAtk[/*shipstructur*/] / 20);
+$shellAtk[10] = $shellBase[10] * (1 + $techAtk[/*shipstructur*/] / 20);
+$shellAtk[11] = $shellBase[11] * (1 + $techAtk[/*shipstructur*/] / 20);
+$shellAtk[13] = $shellBase[13] * (1 + $techAtk[/*shipstructur*/] / 20 + $techAtk[14] / 20);
+
+//esquive atk
+$dodgeAtk[0] = $dodgeBase[0] * (1 + $techAtk[/*analyse*/] / 20);
+$dodgeAtk[1] = $dodgeBase[1] * (1 + $techAtk[/*analyse*/] / 20);
+$dodgeAtk[2] = $dodgeBase[2] * (1 + $techAtk[/*analyse*/] / 20);
+$dodgeAtk[3] = $dodgeBase[3] * (1 + $techAtk[/*analyse*/] / 20);
+$dodgeAtk[4] = $dodgeBase[4] * (1 + $techAtk[/*analyse*/] / 20 + $techAtk[34] / 20);
+$dodgeAtk[5] = $dodgeBase[5] * (1 + $techAtk[/*analyse*/] / 20 + $techAtk[34] / 20);
+$dodgeAtk[6] = $dodgeBase[6] * (1 + $techAtk[/*analyse*/] / 20);
+$dodgeAtk[7] = $dodgeBase[7] * (1 + $techAtk[/*analyse*/] / 20 + $techAtk[34] / 20);
+$dodgeAtk[8] = $dodgeBase[8] * (1 + $techAtk[/*analyse*/] / 20 + $techAtk[35] / 20);
+$dodgeAtk[9] = 0;
+$dodgeAtk[10] = 0;
+$dodgeAtk[11] = 0;
+
+
+/****** ROCKET COMBAT **********/
+$text .= 'Attacking fleet has rockets with power of ' . $rocketTotalAtk .
+    ' and the defending patrol has rockets with power of ' . $rocketTotalDef .
+    '.' . PHP_EOL . PHP_EOL;
+
+//init surface def
+$sizeDef[0] = $shipCountDef[0] * ($sizeBase[0]);
+$sizeDef[1] = $shipCountDef[1] * ($sizeBase[1]);
+$sizeDef[2] = $shipCountDef[2] * ($sizeBase[2]);
+$sizeDef[3] = $shipCountDef[3] * ($sizeBase[3]);
+$sizeDef[4] = $shipCountDef[4] * ($sizeBase[4] * (1 + $techDef[37] / 20));
+$sizeDef[5] = $shipCountDef[5] * ($sizeBase[5] * (1 + $techDef[37] / 20));
+$sizeDef[6] = $shipCountDef[6] * ($sizeBase[6]);
+$sizeDef[7] = $shipCountDef[7] * ($sizeBase[7] * (1 + $techDef[37] / 20));
+$sizeDef[8] = $shipCountDef[8] * ($sizeBase[8] * (1 + $techDef[38] / 20));
+$sizeDef[9] = $shipCountDef[9] * ($sizeBase[9]);
+$sizeDef[10] = $shipCountDef[10] * ($sizeBase[10]);
+$sizeDef[11] = $shipCountDef[11] * ($sizeBase[11]);
+$sizeDef[13] = $shipCountDef[13] * ($sizeBase[13]);
+$sizeTotalDef = $sizeDef[0] + $sizeDef[1] + $sizeDef[2] + $sizeDef[3] +
+    $sizeDef[4] + $sizeDef[5] + $sizeDef[6] + $sizeDef[7] +
+    $sizeDef[8] + $sizeDef[9] + $sizeDef[10] + $sizeDef[11] + $sizeDef[13];
+
+//init surface atk
+$sizeAtk[0] = $shipCountAtk[0] * ($sizeBase[0]);
+$sizeAtk[1] = $shipCountAtk[1] * ($sizeBase[1]);
+$sizeAtk[2] = $shipCountAtk[2] * ($sizeBase[2]);
+$sizeAtk[3] = $shipCountAtk[3] * ($sizeBase[3]);
+$sizeAtk[4] = $shipCountAtk[4] * ($sizeBase[4] * (1 + $techAtk[37] / 20));
+$sizeAtk[5] = $shipCountAtk[5] * ($sizeBase[5] * (1 + $techAtk[37] / 20));
+$sizeAtk[6] = $shipCountAtk[6] * ($sizeBase[6]);
+$sizeAtk[7] = $shipCountAtk[7] * ($sizeBase[7] * (1 + $techAtk[37] / 20));
+$sizeAtk[8] = $shipCountAtk[8] * ($sizeBase[8] * (1 + $techAtk[38] / 20));
+$sizeAtk[9] = $shipCountAtk[9] * ($sizeBase[9]);
+$sizeAtk[10] = $shipCountAtk[10] * ($sizeBase[10]);
+$sizeAtk[11] = $shipCountAtk[11] * ($sizeBase[11]);
+$sizeAtk[13] = $shipCountAtk[13] * ($sizeBase[13]);
+$sizeTotalAtk = $sizeAtk[0] + $sizeAtk[1] + $sizeAtk[2] + $sizeAtk[3] +
+    $sizeAtk[4] + $sizeAtk[5] + $sizeAtk[6] + $sizeAtk[7] +
+    $sizeAtk[8] + $sizeAtk[9] + $sizeAtk[10] + $sizeAtk[11] + $sizeAtk[13];
+
+for ($_i = 0; $_i < 20; $_i++) {
+    if ($shipCountAtk[$_i] > 0 && $_i != 12) {
+        //damage on attacker
+        $damageThisRoundAtk[$_i] = $rocketTotalDef * ($sizeAtk[$_i] / $sizeTotalAtk);
+
+        if ($damageThisRoundAtk[$_i] < 0) $damageThisRoundAtk[$_i] = 0; //healing not allowed
+
+        $fallenShipsAtk[$_i] = intdiv(($damageThisRoundAtk[$_i] + 1), $shellAtk[$_i] + 1); //calculate destroyed ships
+        if ($fallenShipsAtk[$_i] > $shipCountAtk[$_i]) $fallenShipsAtk[$_i] = $shipCountAtk[$_i]; //max are all remaining ships
+
+        $shipCountAtk[$_i] -= $fallenShipsAtk[$_i];
+
+        $resetDmgAtk = ($damageThisRoundAtk[$_i] - ($fallenShipsAtk[$_i] * $shellAtk[$_i]));
+        $remainingDamageAtk[$_i] = $resetDmgAtk;
+        $text .= 'Rockets hit the attacking';
+        switch ($_i) {
+            case 0:
+                $text .= ' Scouts';
+                break;
+            case 1:
+                $text .= ' Call.Freg.';
+                break;
+            case 2:
+                $text .= ' F.Crui.';
+                break;
+            case 3:
+                $text .= ' Athmos';
+                break;
+            case 4:
+                $text .= ' Brid.Glo.';
+                break;
+            case 5:
+                $text .= ' Blondels';
+                break;
+            case 6:
+                $text .= ' Esakis';
+                break;
+            case 7:
+                $text .= ' Vict.';
+                break;
+            case 8:
+                $text .= ' Hess.';
+                break;
+            case 9:
+                $text .= ' IEBs';
+                break;
+            case 10:
+                $text .= ' Probes';
+                break;
+            case 11:
+                $text .= ' Cargos';
+                break;
+            case 13:
+                $text .= ' Recy.';
+                break;
+        }
+        $text .= ' with ' .
+            Round($damageThisRoundAtk[$_i]) . ' damage and destroy ' .
+            Round($fallenShipsAtk[$_i]) . ' ships.' . PHP_EOL;
+    }
+
+    if ($shipCountDef[$_i] > 0 && $_i != 12) {
+        //damage on defender
+        $damageThisRoundDef[$_i] = $rocketTotalAtk * ($sizeDef[$_i] / $sizeTotalDef);
+
+        if ($damageThisRoundDef[$_i] < 0) $damageThisRoundDef[$_i] = 0; //healing not allowed
+
+        $fallenShipsDef[$_i] = intdiv(($damageThisRoundDef[$_i] + 1), $shellDef[$_i] + 1); //calculate destroyed ships
+        if ($fallenShipsDef[$_i] > $shipCountDef[$_i]) $fallenShipsDef[$_i] = $shipCountDef[$_i]; //max are all remaining ships
+
+        $shipCountDef[$_i] -= $fallenShipsDef[$_i];
+
+        $resetDmgDef = ($damageThisRoundDef[$_i] - ($fallenShipsDef[$_i] * $shellDef[$_i]));
+        $remainingDamageDef[$_i] = $resetDmgDef;
+        $text .= 'Rockets hit the defending';
+        switch ($_i) {
+            case 0:
+                $text .= ' Scouts';
+                break;
+            case 1:
+                $text .= ' Call.Freg.';
+                break;
+            case 2:
+                $text .= ' F.Crui.';
+                break;
+            case 3:
+                $text .= ' Athmos';
+                break;
+            case 4:
+                $text .= ' Brid.Glo.';
+                break;
+            case 5:
+                $text .= ' Blondels';
+                break;
+            case 6:
+                $text .= ' Esakis';
+                break;
+            case 7:
+                $text .= ' Vict.';
+                break;
+            case 8:
+                $text .= ' Hess.';
+                break;
+            case 9:
+                $text .= ' IEBs';
+                break;
+            case 10:
+                $text .= ' Probes';
+                break;
+            case 11:
+                $text .= ' Cargos';
+                break;
+            case 13:
+                $text .= ' Recy.';
+                break;
+        }
+        $text .= ' with ' .
+            Round($damageThisRoundDef[$_i]) . ' damage and destroy ' .
+            Round($fallenShipsDef[$_i]) . ' ships.' . PHP_EOL;
+    }
+}
+
+while ($turnNumber < 15) {
+    echo PHP_EOL . PHP_EOL . 'Round ' . $turnNumber;
+    /****** DEBUT COMBAT **********/
+
+    $shieldDef[0] = $shipCountDef[0] * ($shieldBase[0] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[1] = $shipCountDef[1] * ($shieldBase[1] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[2] = $shipCountDef[2] * ($shieldBase[2] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[3] = $shipCountDef[3] * ($shieldBase[3] * (1 + $techDef[/*energy*/] / 20 + $techDef[29] / 20));
+    $shieldDef[4] = $shipCountDef[4] * ($shieldBase[4] * (1 + $techDef[/*energy*/] / 20 + $techDef[29] / 20));
+    $shieldDef[5] = $shipCountDef[5] * ($shieldBase[5] * (1 + $techDef[/*energy*/] / 20 + $techDef[29] / 20));
+    $shieldDef[6] = $shipCountDef[6] * ($shieldBase[6] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[7] = $shipCountDef[7] * ($shieldBase[7] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[8] = $shipCountDef[8] * ($shieldBase[8] * (1 + $techDef[/*energy*/] / 20 + $techDef[32] / 20));
+    $shieldDef[9] = $shipCountDef[9] * ($shieldBase[9] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[10] = 0;
+    $shieldDef[11] = $shipCountDef[11] * ($shieldBase[11] * (1 + $techDef[/*energy*/] / 20));
+    $shieldDef[13] = $shipCountDef[13] * ($shieldBase[13] * (1 + $techDef[/*energy*/] / 20));
+
+    $damageDef[0] = $shipCountDef[0] * ($damageBase[0] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20));
+    $damageDef[1] = $shipCountDef[1] * ($damageBase[1] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20));
+    $damageDef[2] = $shipCountDef[2] * ($damageBase[2] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20 + $techDef[25] / 20));
+    $damageDef[3] = $shipCountDef[3] * ($damageBase[3] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20 + $techDef[25] / 20));
+    $damageDef[4] = $shipCountDef[4] * ($damageBase[4] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20 + $techDef[25] / 20));
+    $damageDef[5] = $shipCountDef[5] * ($damageBase[5] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20 + $techDef[26] / 20));
+    $damageDef[6] = $shipCountDef[6] * ($damageBase[6] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20));
+    $damageDef[7] = $shipCountDef[7] * ($damageBase[7] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20 + $techDef[25] / 20));
+    $damageDef[8] = $shipCountDef[8] * ($damageBase[8] * (1 + $techDef[/*managementOfWeaponsystems*/] / 20 + $techDef[26] / 20));
+    $damageDef[9] = 0;
+    $damageDef[10] = 0;
+    $damageDef[11] = 0;
+
+    $damageTotalDef = $damageDef[0] + $damageDef[1] + $damageDef[2] + $damageDef[3] +
+        $damageDef[4] + $damageDef[5] + $damageDef[6] + $damageDef[7] + $damageDef[8];
+
+    $precisionDef[0] = $shipCountDef[0] * $precisionBase[0] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[1] = $shipCountDef[1] * $precisionBase[1] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[2] = $shipCountDef[2] * $precisionBase[2] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[3] = $shipCountDef[3] * $precisionBase[3] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[4] = $shipCountDef[4] * $precisionBase[4] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[5] = $shipCountDef[5] * $precisionBase[5] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[6] = $shipCountDef[6] * $precisionBase[6] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[7] = $shipCountDef[7] * $precisionBase[7] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[8] = $shipCountDef[8] * $precisionBase[8] * (1 + $techDef[/**electronic**/] / 20) * (1 + $techDef[/**starbase**/] / 20);
+    $precisionDef[9] = 0;
+    $precisionDef[10] = 0;
+    $precisionDef[11] = 0;
+    $precisionTotalDef = $precisionDef[0] + $precisionDef[1] + $precisionDef[2] + $precisionDef[3] +
+        $precisionDef[4] + $precisionDef[5] + $precisionDef[6] + $precisionDef[7] + $precisionDef[8];
+
+    $sizeDef[0] = $shipCountDef[0] * ($sizeBase[0]);
+    $sizeDef[1] = $shipCountDef[1] * ($sizeBase[1]);
+    $sizeDef[2] = $shipCountDef[2] * ($sizeBase[2]);
+    $sizeDef[3] = $shipCountDef[3] * ($sizeBase[3]);
+    $sizeDef[4] = $shipCountDef[4] * ($sizeBase[4] * (1 + $techDef[37] / 20));
+    $sizeDef[5] = $shipCountDef[5] * ($sizeBase[5] * (1 + $techDef[37] / 20));
+    $sizeDef[6] = $shipCountDef[6] * ($sizeBase[6]);
+    $sizeDef[7] = $shipCountDef[7] * ($sizeBase[7] * (1 + $techDef[37] / 20));
+    $sizeDef[8] = $shipCountDef[8] * ($sizeBase[8] * (1 + $techDef[38] / 20));
+    $sizeDef[9] = $shipCountDef[9] * ($sizeBase[9]);
+    $sizeDef[10] = $shipCountDef[10] * ($sizeBase[10]);
+    $sizeDef[11] = $shipCountDef[11] * ($sizeBase[11]);
+    $sizeDef[13] = $shipCountDef[13] * ($sizeBase[13]);
+
+    $sizeTotalDef = $sizeDef[0] + $sizeDef[1] + $sizeDef[2] + $sizeDef[3] +
+        $sizeDef[4] + $sizeDef[5] + $sizeDef[6] + $sizeDef[7] +
+        $sizeDef[8] + $sizeDef[9] + $sizeDef[10] + $sizeDef[11] + $sizeDef[13];
+
+    $shipCountTotalDef = $shipCountDef[0] + $shipCountDef[1] + $shipCountDef[2] + $shipCountDef[3] +
+        $shipCountDef[4] + $shipCountDef[5] + $shipCountDef[6] + $shipCountDef[7] +
+        $shipCountDef[8] + $shipCountDef[9] + $shipCountDef[10] + $shipCountDef[11] + $shipCountDef[13];
+
+
+    /****** ATK *********/
+
+    $shieldAtk[0] = $shipCountAtk[0] * ($shieldBase[0] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[1] = $shipCountAtk[1] * ($shieldBase[1] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[2] = $shipCountAtk[2] * ($shieldBase[2] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[3] = $shipCountAtk[3] * ($shieldBase[3] * (1 + $techAtk[/*energy*/] / 20 + $techAtk[29] / 20));
+    $shieldAtk[4] = $shipCountAtk[4] * ($shieldBase[4] * (1 + $techAtk[/*energy*/] / 20 + $techAtk[29] / 20));
+    $shieldAtk[5] = $shipCountAtk[5] * ($shieldBase[5] * (1 + $techAtk[/*energy*/] / 20 + $techAtk[29] / 20));
+    $shieldAtk[6] = $shipCountAtk[6] * ($shieldBase[6] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[7] = $shipCountAtk[7] * ($shieldBase[7] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[8] = $shipCountAtk[8] * ($shieldBase[8] * (1 + $techAtk[/*energy*/] / 20 + $techAtk[32] / 20));
+    $shieldAtk[9] = $shipCountAtk[9] * ($shieldBase[9] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[10] = 0;
+    $shieldAtk[11] = $shipCountAtk[11] * ($shieldBase[11] * (1 + $techAtk[/*energy*/] / 20));
+    $shieldAtk[13] = $shipCountAtk[13] * ($shieldBase[13] * (1 + $techAtk[/*energy*/] / 20));
+
+    $damageAtk[0] = $shipCountAtk[0] * ($damageBase[0] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20));
+    $damageAtk[1] = $shipCountAtk[1] * ($damageBase[1] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20));
+    $damageAtk[2] = $shipCountAtk[2] * ($damageBase[2] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20 + $techAtk[25] / 20));
+    $damageAtk[3] = $shipCountAtk[3] * ($damageBase[3] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20 + $techAtk[25] / 20));
+    $damageAtk[4] = $shipCountAtk[4] * ($damageBase[4] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20 + $techAtk[25] / 20));
+    $damageAtk[5] = $shipCountAtk[5] * ($damageBase[5] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20 + $techAtk[26] / 20));
+    $damageAtk[6] = $shipCountAtk[6] * ($damageBase[6] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20));
+    $damageAtk[7] = $shipCountAtk[7] * ($damageBase[7] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20 + $techAtk[25] / 20));
+    $damageAtk[8] = $shipCountAtk[8] * ($damageBase[8] * (1 + $techAtk[/*managementOfWeaponsystems*/] / 20 + $techAtk[26] / 20));
+    $damageAtk[9] = 0;
+    $damageAtk[10] = 0;
+    $damageAtk[11] = 0;
+    $damageTotalAtk = $damageAtk[0] + $damageAtk[1] + $damageAtk[2] + $damageAtk[3] +
+        $damageAtk[4] + $damageAtk[5] + $damageAtk[6] + $damageAtk[7] + $damageAtk[8];
+
+    $precisionAtk[0] = $shipCountAtk[0] * $precisionBase[0] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[1] = $shipCountAtk[1] * $precisionBase[1] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[2] = $shipCountAtk[2] * $precisionBase[2] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[3] = $shipCountAtk[3] * $precisionBase[3] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[4] = $shipCountAtk[4] * $precisionBase[4] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[5] = $shipCountAtk[5] * $precisionBase[5] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[6] = $shipCountAtk[6] * $precisionBase[6] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[7] = $shipCountAtk[7] * $precisionBase[7] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[8] = $shipCountAtk[8] * $precisionBase[8] * (1 + $techAtk[/**electronic**/] / 20);
+    $precisionAtk[9] = 0;
+    $precisionAtk[10] = 0;
+    $precisionAtk[11] = 0;
+    $precisionTotalAtk = $precisionAtk[0] + $precisionAtk[1] + $precisionAtk[2] + $precisionAtk[3] + $precisionAtk[4] +
+        $precisionAtk[5] + $precisionAtk[6] + $precisionAtk[7] + $precisionAtk[8];
+
+    $sizeAtk[0] = $shipCountAtk[0] * ($sizeBase[0]);
+    $sizeAtk[1] = $shipCountAtk[1] * ($sizeBase[1]);
+    $sizeAtk[2] = $shipCountAtk[2] * ($sizeBase[2]);
+    $sizeAtk[3] = $shipCountAtk[3] * ($sizeBase[3]);
+    $sizeAtk[4] = $shipCountAtk[4] * ($sizeBase[4] * (1 + $techAtk[37] / 20));
+    $sizeAtk[5] = $shipCountAtk[5] * ($sizeBase[5] * (1 + $techAtk[37] / 20));
+    $sizeAtk[6] = $shipCountAtk[6] * ($sizeBase[6]);
+    $sizeAtk[7] = $shipCountAtk[7] * ($sizeBase[7] * (1 + $techAtk[37] / 20));
+    $sizeAtk[8] = $shipCountAtk[8] * ($sizeBase[8] * (1 + $techAtk[38] / 20));
+    $sizeAtk[9] = $shipCountAtk[9] * ($sizeBase[9]);
+    $sizeAtk[10] = $shipCountAtk[10] * ($sizeBase[10]);
+    $sizeAtk[11] = $shipCountAtk[11] * ($sizeBase[11]);
+    $sizeAtk[13] = $shipCountAtk[13] * ($sizeBase[13]);
+
+    $sizeTotalAtk = $sizeAtk[0] + $sizeAtk[1] + $sizeAtk[2] + $sizeAtk[3] +
+        $sizeAtk[4] + $sizeAtk[5] + $sizeAtk[6] + $sizeAtk[7] +
+        $sizeAtk[8] + $sizeAtk[9] + $sizeAtk[10] + $sizeAtk[11] + $sizeAtk[13];
+
+    $shipCountTotalAtk = $shipCountAtk[0] + $shipCountAtk[1] + $shipCountAtk[2] + $shipCountAtk[3] +
+        $shipCountAtk[4] + $shipCountAtk[5] + $shipCountAtk[6] + $shipCountAtk[7] +
+        $shipCountAtk[8] + $shipCountAtk[9] + $shipCountAtk[10] + $shipCountAtk[11] + $shipCountAtk[13];
+
+    if ($shipCountTotalAtk < 0) $shipCountTotalAtk = 0;
+    if ($shipCountTotalDef < 0) $shipCountTotalDef = 0;
+
+    if ($shipCountTotalAtk <= 0 || $shipCountTotalDef <= 0) {
+        break;
+    } else {
+        $text .= PHP_EOL . ' ---- TURN ' . ($turnNumber + 1) . ' ---- ' . PHP_EOL . PHP_EOL;
+        $text .= 'There are ' . $shipCountTotalAtk . ' ships for the attacking fleet with a fire power of ' . $damageTotalAtk . ',
+    and ' . $shipCountTotalDef . ' for the Defense Patrol, with a fire power of ' . $damageTotalDef . '.' . PHP_EOL . PHP_EOL;
+
+        for ($_i = 0; $_i < 20; $_i++) //résolution des dommages et des pertes
+        {
+            if ($shipCountAtk[$_i] > 0 && $_i != 12) {
+                $nbbup = $shipCountAtk[$_i]; //stockage du nombre de vaisseau d'id I a ce tour pour l'afficher dans le rapport.
+
+                //calculating dodgeFactor
+                $baseFactor = 1 - $dodgeAtk[$_i] / 100;
+                $movabilityFactor = 1.2 / (1 + 0.5 * pow(0.9032, $shipCountAtk[$_i] - 1));
+                $squadronSizeFactor = 2 - 1.2 / (1 + 0.5 * pow(0.7953, $sizeTotalAtk / $sizeAtk[$_i] - 1));
+                $precisionPerSquadronFactor = 2 / (1 + 1.5 * pow(0.9221, $precisionTotalDef / $sizeAtk[$_i]));
+                $dodgeFactor[$_i] = $baseFactor * $movabilityFactor * $squadronSizeFactor;
+
+                echo PHP_EOL . PHP_EOL . 'Attacking shipType' . $_i . ':' .
+                    PHP_EOL . 'baseFactor = ' . $baseFactor .
+                    PHP_EOL . 'movabilityFactor = ' . $movabilityFactor .
+                    PHP_EOL . 'squadronSizeFactor = ' . $squadronSizeFactor .
+                    PHP_EOL . 'precisionPerSquadronFactor = ' . $precisionPerSquadronFactor .
+                    PHP_EOL . 'dodgeFactor = ' . $dodgeFactor[$_i];
+
+                $damageThisRoundAtk[$_i] = ($dodgeFactor[$_i] * ($damageTotalDef * ($sizeAtk[$_i] / $sizeTotalAtk))) - $shieldAtk[$_i] +
+                    $remainingDamageAtk[$_i];//Total Damage
+
+                if ($damageThisRoundAtk[$_i] < 0) $damageThisRoundAtk[$_i] = 0; //healing not allowed
+
+                $fallenShipsAtk[$_i] = intdiv(($damageThisRoundAtk[$_i] + 1), $shellAtk[$_i] + 1); //calculate destroyed ships
+                if ($fallenShipsAtk[$_i] > $shipCountAtk[$_i]) $fallenShipsAtk[$_i] = $shipCountAtk[$_i]; //max are all remaining ships
+
+                $shipCountAtk[$_i] -= $fallenShipsAtk[$_i];
+
+                $resetDmgAtk = ($damageThisRoundAtk[$_i] - ($fallenShipsAtk[$_i] * $shellAtk[$_i]));
+                $remainingDamageAtk[$_i] = $resetDmgAtk;
+
+                $text .= 'The ' . $nbbup . ' atk ';
+                switch ($_i) {
+                    case 0:
+                        $text .= ' Scout';
+                        break;
+                    case 1:
+                        $text .= ' Call.Freg.';
+                        break;
+                    case 2:
+                        $text .= ' F.Crui.';
+                        break;
+                    case 3:
+                        $text .= ' Athmos';
+                        break;
+                    case 4:
+                        $text .= ' Brid.Glo.';
+                        break;
+                    case 5:
+                        $text .= ' Blondel';
+                        break;
+                    case 6:
+                        $text .= ' Esaki';
+                        break;
+                    case 7:
+                        $text .= ' Vict.';
+                        break;
+                    case 8:
+                        $text .= ' Hess.';
+                        break;
+                    case 9:
+                        $text .= ' IEB';
+                        break;
+                    case 10:
+                        $text .= ' Probes';
+                        break;
+                    case 11:
+                        $text .= ' Cargo';
+                        break;
+                    case 13:
+                        $text .= ' Recy.';
+                        break;
+                }
+                if ($dodgeFactor[$_i] > 1) {
+                    $dodgeText = 'The high precision of the defender increase the damage by ' . (($dodgeFactor[$_i] - 1) * 100) . '%. ';
+                } else {
+                    $dodgeText = 'The ships were able to prevent ' . ((1 - $dodgeFactor[$_i]) * 100) . '% of the damage by dodging it. ';
+                }
+
+                $text .= ' take ' .
+                    Round($damageTotalDef * ($sizeAtk[$_i] / $sizeTotalAtk)) . ' damage. ' .
+                    $dodgeText . 'The shields absorb ' .
+                    Round($shieldAtk[$_i]) . ' damage. ' .
+                    Round($fallenShipsAtk[$_i]) . ' ships are destroyed.' . PHP_EOL;
+            }
+
+            if ($shipCountDef[$_i] > 0 && $_i != 12) {
+                $nbbup = $shipCountDef[$_i];
+
+                //calculating dodgeFactor
+                $baseFactor = 1 - $dodgeDef[$_i] / 100;
+                $movabilityFactor = 1.2 / (1 + 0.5 * pow(0.9032, $shipCountDef[$_i] - 1));
+                $squadronSizeFactor = 2 - 1.2 / (1 + 0.5 * pow(0.7953, $sizeTotalDef / $sizeDef[$_i] - 1));
+                $precisionPerSquadronFactor = 2 / (1 + 1 * pow(0.9221, $precisionTotalAtk / $sizeDef[$_i]));
+                $dodgeFactor[$_i] = $baseFactor * $movabilityFactor * $squadronSizeFactor;
+
+                $damageThisRoundDef[$_i] = ($dodgeFactor[$_i] * ($damageTotalAtk * ($sizeDef[$_i] / $sizeTotalDef))) -
+                    $shieldDef[$_i] + $remainingDamageDef[$_i];
+                if ($damageThisRoundDef[$_i] < 0) $damageThisRoundDef[$_i] = 0; //degats mini 0
+                $fallenShipsDef[$_i] = intdiv(($damageThisRoundDef[$_i] + 1), $shellDef[$_i] + 1);
+                if ($fallenShipsDef[$_i] > $shipCountDef[$_i]) $fallenShipsDef[$_i] = $shipCountDef[$_i];
+                $shipCountDef[$_i] -= $fallenShipsDef[$_i];
+                $resetDmgDef = ($damageThisRoundDef[$_i] - ($fallenShipsDef[$_i] * $shellDef[$_i]));
+                $remainingDamageDef[$_i] = $resetDmgDef;
+
+                echo PHP_EOL . PHP_EOL . 'Defender:' .
+                    PHP_EOL . 'baseFactor = ' . $baseFactor .
+                    PHP_EOL . 'movabilityFactor = ' . $movabilityFactor .
+                    PHP_EOL . 'squadronSizeFactor = ' . $squadronSizeFactor .
+                    PHP_EOL . 'precisionPerSquadronFactor = ' . $precisionPerSquadronFactor .
+                    PHP_EOL . 'dodgeFactor = ' . $dodgeFactor[$_i];
+
+                $text .= 'The ' . $nbbup . ' def ';
+                switch ($_i) // on regarde quel nom y correspond
+                {
+                    case 0:
+                        $text .= ' Scout';
+                        break;
+                    case 1:
+                        $text .= ' Call.Freg.';
+                        break;
+                    case 2:
+                        $text .= ' F.Crui.';
+                        break;
+                    case 3:
+                        $text .= ' Athmos';
+                        break;
+                    case 4:
+                        $text .= ' Brid.Glo.';
+                        break;
+                    case 5:
+                        $text .= ' Blondel';
+                        break;
+                    case 6:
+                        $text .= ' Esaki';
+                        break;
+                    case 7:
+                        $text .= ' Vict.';
+                        break;
+                    case 8:
+                        $text .= ' Hess.';
+                        break;
+                    case 9:
+                        $text .= ' IEB';
+                        break;
+                    case 10:
+                        $text .= ' Probes';
+                        break;
+                    case 11:
+                        $text .= ' Cargo';
+                        break;
+                    case 13:
+                        $text .= ' Recy.';
+                        break;
+                }
+                if ($dodgeFactor[$_i] > 1) {
+                    $dodgeText = 'The high precision of the attacker increase the damage by ' . (($dodgeFactor[$_i] - 1) * 100) . '%. ';
+                } else {
+                    $dodgeText = 'The ships were able to prevent ' . ((1 - $dodgeFactor[$_i]) * 100) . '% of the damage by dodging it. ';
+                }
+
+                $text .= ' take ' .
+                    Round($damageTotalAtk * ($sizeDef[$_i] / $sizeTotalDef)) . ' damage. ' .
+                    $dodgeText .
+                    Round($shieldDef[$_i]) . ' damage. ' .
+                    Round($fallenShipsDef[$_i]) . ' ships are destroyed.' . PHP_EOL;
+            }
+        }
+    }
+    $turnNumber++;
+}
+
+$shipCountTotalAtk = $shipCountAtk[0] + $shipCountAtk[1] + $shipCountAtk[2] + $shipCountAtk[3] +
+    $shipCountAtk[4] + $shipCountAtk[5] + $shipCountAtk[6] + $shipCountAtk[7] + $shipCountAtk[8] +
+    $shipCountAtk[9] + $shipCountAtk[10] + $shipCountAtk[11] + $shipCountAtk[13];
+
+$shipCountTotalDef = $shipCountDef[0] + $shipCountDef[1] + $shipCountDef[2] + $shipCountDef[3] +
+    $shipCountDef[4] + $shipCountDef[5] + $shipCountDef[6] + $shipCountDef[7] + $shipCountDef[8] +
+    $shipCountDef[9] + $shipCountDef[10] + $shipCountDef[11] + $shipCountDef[13];
+
+$text .= PHP_EOL . ' ---- RESULT ----' . PHP_EOL . PHP_EOL .
+    'Fight ends in Round ' . $turnNumber . ' with ' . $shipCountTotalAtk . ' ships for the Attacker and '
+    . $shipCountTotalDef . ' ships for the Defender.';
+
+echo $text;

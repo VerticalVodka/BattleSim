@@ -1,0 +1,17 @@
+<?php
+
+$text = "Fighting report on " . $planeteDef['nom_planete'] . "(" . $planeteDef['nom_joueur'] . ")" . PHP_EOL . PHP_EOL;
+
+// Has to be loaded from Database after initialization
+$techDef = array_fill(0, 40, 0);
+$techAtk = array_fill(0, 40, 0);
+$shipCountAtk = array_fill(0, 20, 0);
+$shipCountDef = array_fill(0, 20, 0);
+$remainingDamageAtk = array_fill(0, 20, 0);
+$remainingDamageDef = array_fill(0, 20, 0);
+$shieldAtk = array_fill(0, 20, 0);
+$shieldDef = array_fill(0, 20, 0);
+$damageAtk = array_fill(0, 20, 0);
+$damageDef = array_fill(0, 20, 0);
+$sizeAtk = array_fill(0, 20, 0);
+$sizeDef = array_fill(0, 20, 0);
